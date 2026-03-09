@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For Riya ❤️</title>
+<title>For Riya 🌹</title>
 
 <style>
 
@@ -13,21 +13,52 @@ justify-content:center;
 align-items:center;
 flex-direction:column;
 font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#ff758c,#ff7eb3);
+background:linear-gradient(135deg,#1e3c72,#ff4b5c);
 overflow:hidden;
 text-align:center;
 color:white;
 }
 
-h1{
-font-size:45px;
-margin-bottom:10px;
+/* flower background */
+
+.flower{
+position:absolute;
+font-size:22px;
+animation:float 8s linear infinite;
+opacity:0.8;
 }
 
-#message{
-font-size:22px;
-margin-bottom:20px;
-min-height:30px;
+@keyframes float{
+0%{
+transform:translateY(100vh) rotate(0deg);
+opacity:1;
+}
+100%{
+transform:translateY(-10vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* rose opening */
+
+#rose{
+font-size:80px;
+animation:bloom 2s ease forwards;
+}
+
+@keyframes bloom{
+0%{
+transform:scale(0);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+#main{
+display:none;
 }
 
 button{
@@ -50,26 +81,9 @@ transform:scale(1.15);
 }
 
 #no{
-background:white;
-color:black;
-position:absolute;
-}
-
-.heart{
-position:absolute;
-font-size:20px;
-animation:float 6s linear infinite;
-}
-
-@keyframes float{
-0%{
-transform:translateY(100vh);
-opacity:1;
-}
-100%{
-transform:translateY(-10vh);
-opacity:0;
-}
+background:#3a7bd5;
+color:white;
+position:relative;
 }
 
 </style>
@@ -78,22 +92,30 @@ opacity:0;
 
 <body>
 
+<div id="rose">🌹</div>
+
+<div id="main">
 <h1>Hey Riya ❤️</h1>
-
-<div id="message"></div>
-
+<p id="message"></p>
 <h2>Do you like me? 🥺</h2>
 
-<div>
 <button id="yes" onclick="yes()">Yes 💖</button>
-<button id="no" onmouseover="move()">No 🙈</button>
+<button id="no" onclick="noClick()">No 🙈</button>
 </div>
 
 <script>
 
+/* show main after rose animation */
+
+setTimeout(function(){
+document.getElementById("rose").style.display="none";
+document.getElementById("main").style.display="block";
+typing();
+},2000);
+
 /* typing message */
 
-var text="I've wanted to tell you something for a long time...";
+var text="I've wanted to ask you something for a long time...";
 var i=0;
 
 function typing(){
@@ -104,46 +126,79 @@ setTimeout(typing,60);
 }
 }
 
-typing();
-
 /* yes button */
 
 function yes(){
 document.body.innerHTML=
-"<h1>Riya ❤️</h1><h2>You just made me the happiest person today 🥰</h2><p>I knew you liked me too 😌</p>";
+"<h1>Riya ❤️</h1><h2>You just made me the happiest person today 🌹</h2><p>I knew you liked me too 😊</p>";
 }
 
-/* no button escapes */
+/* no button logic */
 
-function move(){
+var noCount=0;
+
+var messages=[
+"Are you sure?",
+"Really sure?",
+"Absolutely sure?",
+"Think again...",
+"Last chance?",
+"Still no?",
+"Are you really sure Riya?",
+"Maybe reconsider?",
+"Don't break my heart 😅"
+];
+
+function noClick(){
+
+noCount++;
+
+if(noCount<56){
+
+var msg=messages[Math.floor(Math.random()*messages.length)];
+
+alert(msg);
+
+}else{
+
+moveButton();
+
+}
+
+}
+
+/* make button run */
+
+function moveButton(){
+
+var btn=document.getElementById("no");
 
 var x=Math.random()*window.innerWidth;
 var y=Math.random()*window.innerHeight;
 
-var btn=document.getElementById("no");
-
+btn.style.position="absolute";
 btn.style.left=x+"px";
 btn.style.top=y+"px";
 
 }
 
-/* floating hearts */
+/* floating flowers */
 
 setInterval(function(){
 
-let heart=document.createElement("div");
+let flower=document.createElement("div");
 
-heart.className="heart";
-heart.innerHTML="❤";
+flower.className="flower";
+flower.innerHTML="🌸";
 
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(Math.random()*20+10)+"px";
+flower.style.left=Math.random()*100+"vw";
+flower.style.fontSize=(Math.random()*20+15)+"px";
 
-document.body.appendChild(heart);
+document.body.appendChild(flower);
 
-setTimeout(()=>{heart.remove();},6000);
+setTimeout(()=>{flower.remove();},8000);
 
-},400);
+},500);
 
 </script>
 
